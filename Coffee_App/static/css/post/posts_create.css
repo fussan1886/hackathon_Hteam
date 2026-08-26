@@ -1,0 +1,130 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --page-bg: #f6f2ea;
+    --card-bg: #ebe0c5;
+    --accent: #5E3C30;
+    --border-soft: #c9bdb5;
+}
+
+body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--accent);
+    font-family: sans-serif;
+}
+
+.post-form-container {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 24px 16px 100px;
+}
+
+.post-form-container h1 {
+    margin: 0 0 16px;
+    color: var(--accent);
+    font-size: 22px;
+    font-weight: 700;
+    text-align: left;
+}
+
+/* フォーム全体　*/
+.post-form-container form {
+    padding: 24px;
+    background: var(--card-bg);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/*各入力項目*/
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ==== 投稿 form ==== */
+
+.form-group textarea {
+    width: 100%;
+    min-height: 220px;
+    padding: 16px;
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    background: var(--page-bg);
+    color: var(--accent);
+    font-size: 16px;
+    line-height: 1.6;
+    resize: vertical;
+}
+
+.form-group textarea:focus,
+.form-group select:focus,
+.form-group input[type="file"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(94, 60, 48, 0.2);
+}
+
+/*　カテゴリー選択　*/
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    background: rgba(249, 250, 251, 0.9);
+    color: var(--accent);
+    font-size: 16px;
+}
+
+
+/*画像選択*/
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    background: var(--page-bg);
+    color: var(--accent);
+}
+
+/*説明文*/
+.form-group p {
+    margin: 0;
+    color: #76584b;
+    font-size: 12px;
+}
+
+/*投稿ボタン*/
+.post-form-container button[type="submit"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--card-bg);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.post-form-container button[type="submit"]:hover {
+    background: #4a2f26;
+    transform: translateY(-1px);
+}
+
+.post-form-container button[type="submit"]:active {
+    transform: translateY(0);
+}

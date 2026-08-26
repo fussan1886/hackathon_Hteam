@@ -1,0 +1,37 @@
+.bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    padding: 10px 8px;
+    background: #ebe0c5;
+    border-top: 2px solid #5e3c30;
+    box-shadow: 0 -4px rgba(94, 60, 48, 0.2);
+}
+
+.bottom-nav__item {
+    flex: 1;
+    min-height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #5e3c30;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.bottom-nav__item:hover {
+    background: #f6f2ea;
+}
+
+.bottom-nav__label {
+    display: block;
+}

@@ -1,0 +1,80 @@
+:root {
+    --page-bg: #f6f2ea;
+    --card-bg: #ebe0c5;
+    --brown: #5e3c30;
+    --border: #c9bdb5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--brown);
+    font-family: sans-serif;
+}
+
+.error-container {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 40px 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.error-code {
+    margin: 0;
+    color: var(--brown);
+    font-size: 95px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 4px;
+}
+
+.error-container h1 {
+    margin: 24px 0 12px;
+    color: var(--brown);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.error-container>p:not(.error-code) {
+    margin: 0 0 24px;
+    color: #76584b;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.error-container .botton {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 999px;
+    background: var(--brown);
+    color: var(--card-bg);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.error-container .botton:hover {
+    background: #4a2f26;
+}
+
+@media (max-width: 480px) {
+    .error-code {
+        font-size: 72px;
+    }
+
+    .error-container h1 {
+        font-size: 20px;
+    }
+}

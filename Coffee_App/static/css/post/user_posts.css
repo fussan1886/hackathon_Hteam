@@ -1,0 +1,85 @@
+:root {
+    --page-bg: #f6f2ea;
+    --card-bg: #ebe0c5;
+    --brown: #5e3c30;
+    --border: #c9bdb5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--brown);
+    font-family: sans-serif;
+}
+
+.post-post-container {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 24px 16px 100px;
+}
+
+.profile-summary {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(94, 60, 48, 0.2);
+}
+
+.profile-icon {
+    width: 89px;
+    height: 80px;
+    border: 2px solid var(--brown);
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.profile-summary h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.profile-summary p {
+    margin: 8px 0 0;
+    color: #76584d;
+    line-height: 1.6;
+}
+
+.user-posts-container>h2 {
+    margin: 0 0 16px;
+    font-size: 20px;
+}
+
+.post-card {
+    margin-bottom: 16px;
+    padding: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(94, 60, 48, 0.2);
+}
+
+.post-card p {
+    margin: 0 0 16px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+.post-card a {
+    color: var(--brown);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.post-card a:hover {
+    text-decoration: underline;
+}

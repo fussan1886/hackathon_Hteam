@@ -3,10 +3,7 @@
 {% block title %}検索 - ぬまりば{% endblock %}
 
 {% block css %}
-<link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/search.css') }}"
->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/search/.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -16,13 +13,8 @@
     <form method="get" action="{{ url_for('search_results') }}">
         <div class="form-group">
             <label for="keyword">キーワード</label>
-            <input
-                type="search"
-                id="keyword"
-                name="keyword"
-                value="{{ request.args.get('keyword', '') }}"
-                placeholder="豆、器具、お店など"
-            >
+            <input type="search" id="keyword" name="keyword" value="{{ request.args.get('keyword', '') }}"
+                placeholder="豆、器具、お店など">
         </div>
 
         <div class="form-group">
@@ -32,14 +24,10 @@
                 <option value="">すべてのカテゴリー</option>
 
                 {% for category in categories %}
-                    <option
-                        value="{{ category.id }}"
-                        {% if request.args.get('category')|int == category.id %}
-                            selected
-                        {% endif }
-                    >
+                <option value="{{ category.id }}" {% if request.args.get('category')|int==category.id %} selected {%
+                    endif }>
                     {{ category.category_name }}
-                    </option>
+                </option>
                 {% endfor %}
             </select>
         </div>
