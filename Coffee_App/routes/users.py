@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, abort, render_template, request
 
 from Coffee_App.models.user import User
 
@@ -16,16 +16,9 @@ def get_user(user_id):
     user = User.find_by_id(user_id)
 
     if not user:
-        return {
-            "message": "User not found."
-        }, 404
+        abort(404)
 
-    return {
-        "id": user["id"],
-        "username": user["username"],
-        "email": user["email"],
-        "profile_text": user["profile_text"]
-    }, 200
+    return render_template("users/profile.html", user=user)
 
 @users_bp.route("/users/<int:user_id>", methods=["PUT"])
 def update_user(user_id):

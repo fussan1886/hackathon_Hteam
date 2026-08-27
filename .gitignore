@@ -1,3 +1,4 @@
 .env
 __pycache__/
 *.pyc
+Coffee_App/static/uploads/

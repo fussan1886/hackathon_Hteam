@@ -1,0 +1,17 @@
+{% if session.get('user_id') %}
+<nav class="bottom-nav" aria-label="メインメニュー">
+    <a href="{{ url_for('posts.timeline') }}" class="bottom-nav__item">
+        <span class="bottom-nav__label">ホーム</span>
+    </a>
+
+    {# マイページのルート実装後に有効化する
+    <a href="{{ url_for('users.mypage') }}" class="bottom-nav__item">
+        <span class="bottom-nav__label">設定</span>
+    </a>
+    #}
+
+    <a href="{{ url_for('posts.create_page') }}" class="bottom-nav__item">
+        <span class="bottom-nav__label">投稿</span>
+    </a>
+</nav>
+{% endif %}
