@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block title %}ログイン - ぬまりば{% endblock %}
-{% block page_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth/auth.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -31,8 +31,6 @@
                 {% endwith %}
 
                 <form class="auth-form" method="post" action="{{ url_for('auth.login') }}">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
                     <div class="form-group">
                         <label for="email">メールアドレス</label>
                         <input id="email"
@@ -59,7 +57,7 @@
                     <div class="auth-button-container">
                         <button class="auth-button" type="submit">ログイン</button>
 
-                        <a class="switch-auth-mode" href="{{ url_for('auth.signup') }}">新規登録はこちら</a>                      
+                        <a class="switch-auth-mode" href="{{ url_for('auth.signup') }}">新規登録はこちら</a>
                     </div>
                 </form>
             </div>

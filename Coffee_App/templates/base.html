@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common/header.css') }}">
 
         {% block css %}{% endblock %}
 </head>
@@ -29,7 +30,7 @@
     {% endwith %}
 
     <main class="main-content">
-        {% block content %}{% endblock % }
+        {% block content %}{% endblock %}
     </main>
     
     {% include "common/bottom_nav.html" %}

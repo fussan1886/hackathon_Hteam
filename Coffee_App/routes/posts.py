@@ -1,10 +1,11 @@
 from pathlib import Path
 from uuid import uuid4
 
-from flask import Blueprint, current_app, jsonify, render_template, request, session
+from flask import Blueprint, current_app, jsonify, redirect, render_template, request, session, url_for
 
 from Coffee_App.database import get_db
-from Coffee_App.models.image import find_images_by_post_id, insert_images
+from Coffee_App.models.category import get_categories
+from Coffee_App.models.image import find_images_by_post_id, find_images_by_post_ids, insert_images
 from Coffee_App.models.post import delete_post, find_post_by_id, find_posts, insert_post
 
 
@@ -32,8 +33,31 @@ def _serialize_post(post, images):
 
 @posts_bp.get("/posts/create")
 def create_page():
-    return render_template("posts/post_create.html")
+    if session.get("user_id") is None:
+        return redirect(url_for("auth.login"))
+    return render_template(
+        "posts/post_create.html",
+        categories=get_categories(),
+    )
 
+@posts_bp.get("/posts/timeline")
+def timeline():
+    connection = get_db()
+    with connection.cursor() as cursor:
+        posts = find_posts(cursor)
+        images = find_images_by_post_ids(
+            cursor,
+            [post["id"] for post in posts],
+        )
+
+    images_by_post_id = {}
+    for image in images:
+        images_by_post_id.setdefault(image["post_id"], []).append(image)
+
+    for post in posts:
+        post["images"] = images_by_post_id.get(post["id"], [])
+
+    return render_template("posts/timeline.html", posts=posts)
 
 @posts_bp.post("/posts")
 def create_post():
@@ -84,7 +108,7 @@ def create_post():
         current_app.logger.exception("投稿の作成に失敗しました。")
         return jsonify({"error": "投稿の作成に失敗しました。"}), 500
 
-    return jsonify(_serialize_post(post, images)), 201
+    return redirect(url_for("posts.timeline"))
 
 
 @posts_bp.get("/posts")

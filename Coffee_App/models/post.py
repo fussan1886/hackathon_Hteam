@@ -32,16 +32,30 @@ def find_posts(cursor):
     cursor.execute(
         """
         SELECT
-            id,
-            user_id,
-            content,
-            visibility,
-            created_at,
-            updated_at
-        FROM posts
-        WHERE deleted_at IS NULL
-          AND visibility = 'public'
-        ORDER BY created_at DESC, id DESC
+            p.id,
+            p.user_id,
+            p.content,
+            p.visibility,
+            p.created_at,
+            p.updated_at,
+            u.username,
+            u.profile_image_url,
+            (
+                SELECT COUNT(*)
+                FROM comments AS c
+                WHERE c.post_id = p.id
+            ) AS comment_count,
+            (
+                SELECT COUNT(*)
+                FROM reactions AS r
+                WHERE r.post_id = p.id
+            ) AS reaction_count
+        FROM posts AS p
+        INNER JOIN users AS u ON u.id = p.user_id
+        WHERE p.deleted_at IS NULL
+          AND p.visibility = 'public'
+          AND u.deleted_at IS NULL
+        ORDER BY p.created_at DESC, p.id DESC
         LIMIT 100
         """
     )

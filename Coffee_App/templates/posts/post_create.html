@@ -3,7 +3,7 @@
 {% block title %}投稿する - ぬまりば {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/posts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/post/posts_create.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
         <form 
             method="post" 
             enctype="multipart/form-data"
-            action="{{ url_for('posts.post_create') }}"
+            action="{{ url_for('posts.create_post') }}"
         >
             {% if form %}
                 {{ form.hidden_tag() }}
@@ -53,7 +53,7 @@
                 <input 
                     type="file" 
                     id="image" 
-                    name="image" 
+                    name="images"
                     accept="image/jpeg, image/png, image/webp"
                     multiple
                 >

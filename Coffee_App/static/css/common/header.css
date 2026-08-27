@@ -1,0 +1,37 @@
+.site-header {
+    width: 100%;
+    background: #EBE0C5;
+    border-bottom: 1px solid #c9bdb5;
+    box-shadow: 0 2px 8px rgba(94, 60, 48, 0.1);
+}
+
+.header-inner {
+    max-width: 720px;
+    height: 64px;
+    margin: 0 auto;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 64px;
+    height: 64px;
+    margin-left: 10px;
+
+    background: #5e3c30;
+    color: #ebe0c5;
+    border-radius: 10px;
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0;
+    text-decoration: none;
+}

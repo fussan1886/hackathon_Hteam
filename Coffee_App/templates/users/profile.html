@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user.username }} - ぬまりば{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/users/users.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="mypage-container">
+    <h1>プロフィール</h1>
+
+    <div class="profile-summary">
+        {% if user.profile_image_url %}
+            <img
+                src="{{ user.profile_image_url }}"
+                alt="{{ user.username }}さんのプロフィール画像"
+                class="profile-icon"
+            >
+        {% endif %}
+
+        <div>
+            <h2>{{ user.username }}</h2>
+
+            {% if user.profile_text %}
+                <p>{{ user.profile_text }}</p>
+            {% else %}
+                <p>プロフィール文はまだありません。</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
