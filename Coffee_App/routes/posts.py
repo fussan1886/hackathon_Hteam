@@ -31,7 +31,7 @@ def _serialize_post(post, images):
 
 
 @posts_bp.get("/posts/create")
-def create_page():
+def post_create():
     return render_template("posts/post_create.html")
 
 @posts_bp.get("/posts/timeline")
