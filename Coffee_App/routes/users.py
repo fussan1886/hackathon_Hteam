@@ -6,6 +6,10 @@ from Coffee_App.models.user import User
 users_bp = Blueprint("users", __name__)
 
 
+@users_bp.get("/users/mypage")
+def mypage():
+    return render_template("users/mypage.html")
+
 @users_bp.route("/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
 

@@ -26,3 +26,7 @@ def search_page():
         "search/search.html",
         categories=categories,
     )
+
+@search_bp.get("/search/page")
+def search_page():
+    return render_template("search/search.html")
