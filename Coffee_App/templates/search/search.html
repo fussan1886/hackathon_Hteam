@@ -10,7 +10,7 @@
 <section class="search-container">
     <h1>投稿を検索</h1>
 
-    <form method="get" action="{{ url_for('search_results') }}">
+    <form method="get" action="{{ url_for('search.search_page') }}">
         <div class="form-group">
             <label for="keyword">キーワード</label>
             <input type="search" id="keyword" name="keyword" value="{{ request.args.get('keyword', '') }}"
@@ -24,8 +24,8 @@
                 <option value="">すべてのカテゴリー</option>
 
                 {% for category in categories %}
-                <option value="{{ category.id }}" {% if request.args.get('category')|int==category.id %} selected {%
-                    endif }>
+                <option value="{{ category.id }}" {% if request.args.get('category')|int==category.id %} selected 
+                {% endif %}
                     {{ category.category_name }}
                 </option>
                 {% endfor %}
