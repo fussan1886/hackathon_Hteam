@@ -49,7 +49,7 @@ body {
     background: #ebe0c5;
     border: 1px solid #c9bdb5;
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgda(94, 60, 48, 0.12);
+    box-shadow: 0 4px 12px rgba(94, 60, 48, 0.12);
 }
 
 /* ==== post user　投稿者 ==== */
@@ -60,14 +60,21 @@ body {
     gap: 10px;
     color: #5e3c30;
     font-weight: 700;
+    text-decoration: none;
 }
 
 .user-icon {
+    display: block;
     width: 48px;
     height: 48px;
+    flex: 0 0 48px;
     border: 2px solid #5e3c30;
     border-radius: 12px;
     object-fit: cover;
+}
+
+.post-user a span {
+    display: block;
 }
 
 .category {
