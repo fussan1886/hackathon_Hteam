@@ -3,63 +3,46 @@
 {% block title %}投稿する - ぬまりば {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/post/posts_create.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/post/posts_create.css') }}">
 {% endblock %}
 
 {% block content %}
-    <section class="post-form-container">
-        <h1>投稿する</h1>
-        <form 
-            method="post" 
-            enctype="multipart/form-data"
-            action="{{ url_for('posts.create_post') }}"
-        >
-            {% if form %}
-                {{ form.hidden_tag() }}
-            {% endif %}
-            
-            <div class="form-group">
-                <label for="content">投稿内容</label>
-                <textarea
-                    id="content"
-                    name="content"
-                    rows="8"
-                    maxlength="2000"
-                    placeholder="こだわりの豆や道具、お気に入りのお店などを投稿しよう"
-                    required
-                    >{{ request.form.get('content', '') }}</textarea>
-            </div>
+<section class="post-form-container">
+    <h1>投稿</h1>
+    <form method="post" enctype="multipart/form-data" action="{{ url_for('posts.create_post') }}">
+        {% if form %}
+        {{ form.hidden_tag() }}
+        {% endif %}
 
-            <div class="form-group">
-                <label for="category_id">カテゴリー</label>
+        <div class="form-group">
+            <label for="content">投稿内容</label>
+            <textarea id="content" name="content" rows="8" maxlength="2000" placeholder="こだわりの豆や道具、お気に入りのお店などを投稿しよう"
+                required>{{ request.form.get('content', '') }}</textarea>
+        </div>
 
-                <select id="category_id" name="category_id" required>
-                    <option value="">選択してください</option>
+        <div class="form-group">
+            <label for="category_id">カテゴリー</label>
 
-                    {% for category in categories %}
-                        <option 
-                            value="{{ category['id'] }}" 
-                            {% if request.form.get('category_id')|int == category['id']|int %}selected{% endif %}>
+            <select id="category_id" name="category_id" required>
+                <option value="">選択してください</option>
 
-                            {{ category['category_name'] }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
+                {% for category in categories %}
+                <option value="{{ category['id'] }}" {% if request.form.get('category_id')|int==category['id']|int
+                    %}selected{% endif %}>
 
-            <div class="form-group">
-                <label for="image">投稿画像</label>
-                <input 
-                    type="file" 
-                    id="image" 
-                    name="images"
-                    accept="image/jpeg, image/png, image/webp"
-                    multiple
-                >
-                <p>JPEG, PNG, WebP形式の画像を選択してください。</p>
-            </div>
+                    {{ category['category_name'] }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
 
-            <button type="submit">投稿する</button>
-        </form>
-    </section>
+        <div class="form-group">
+            <label for="image">投稿画像</label>
+            <input type="file" id="image" name="images" accept="image/jpeg, image/png, image/webp" multiple>
+            <p>JPEG, PNG, WebP形式の画像を選択してください。</p>
+        </div>
+
+        <button type="submit">投稿</button>
+    </form>
+</section>
 {% endblock %}
