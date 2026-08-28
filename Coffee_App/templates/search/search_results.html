@@ -21,28 +21,30 @@
         <div class="post-list">
             {% for post in posts %}
                 <article class="post-card">
-                    <a href="{{ url_for('users.profile, 
+                    {#<a href="{{ url_for('users.profile, 
                                        user_id=post.user.id') }}">
                             {{ post.user.username }}
+                    </a>#}
+                    <a href="{{ url_for('users.get_user', user_id=post.user_id) }}">
+                        {{ post.username }}
                     </a>
-
-                    {% if post.category %}
-                        <p>{{ post.category.category_name }}</p>
+                    {% if post.category_name %}
+                        <p>{{ post.category_name }}</p>
                     {% endif %}
 
                     <p>{{ post.content }}</p>
 
-                    {% if post.images %}
+                    {#{% if post.images %}
                         <img
                             src="{{ post.images[0].image_url }}"
                             alt="投稿画像"
                             loading="lazy"
                         >
-                    {% endif %}
+                    {% endif %}#}
 
-                    <a href="{{ url_for('posts.detail', post_id=post.id) }}">
+                    {#<a href="{{ url_for('posts.detail', post_id=post.id) }}">
                         詳細を見る
-                    </a>
+                    </a>#}
                 </article>
             {% endfor %}
         </div>

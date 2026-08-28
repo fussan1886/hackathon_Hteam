@@ -1,13 +1,26 @@
 from pathlib import Path
 from uuid import uuid4
 
-from flask import Blueprint, current_app, jsonify, redirect, render_template, request, session, url_for
+from flask import (
+    Blueprint,
+    current_app,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
 
 from Coffee_App.database import get_db
 from Coffee_App.models.category import get_categories
-from Coffee_App.models.image import find_images_by_post_id, find_images_by_post_ids, insert_images
+from Coffee_App.models.image import (
+    find_images_by_post_id,
+    find_images_by_post_ids,
+    insert_images,
+)
 from Coffee_App.models.post import delete_post, find_post_by_id, find_posts, insert_post
-
+from Coffee_App.models.comment import post_comments
 
 posts_bp = Blueprint("posts", __name__)
 
@@ -40,6 +53,7 @@ def create_page():
         categories=get_categories(),
     )
 
+
 @posts_bp.get("/posts/timeline")
 def timeline():
     connection = get_db()
@@ -59,6 +73,7 @@ def timeline():
 
     return render_template("posts/timeline.html", posts=posts)
 
+
 @posts_bp.post("/posts")
 def create_post():
     user_id = session.get("user_id")
@@ -70,14 +85,24 @@ def create_post():
 
     if not content:
         return jsonify({"error": "本文は必須です。"}), 400
-    
+
     if category_id is None:
         return jsonify({"error": "カテゴリーを選択してください。"}), 400
 
     image_files = [image for image in request.files.getlist("images") if image.filename]
-    invalid_files = [image.filename for image in image_files if not _is_allowed_image(image.filename)]
+    invalid_files = [
+        image.filename for image in image_files if not _is_allowed_image(image.filename)
+    ]
     if invalid_files:
-        return jsonify({"error": "サポートされていない画像フォーマットです。", "files": invalid_files}), 400
+        return (
+            jsonify(
+                {
+                    "error": "サポートされていない画像フォーマットです。",
+                    "files": invalid_files,
+                }
+            ),
+            400,
+        )
 
     upload_directory = Path(current_app.config["POST_UPLOAD_FOLDER"])
     upload_directory.mkdir(parents=True, exist_ok=True)
@@ -163,3 +188,27 @@ def post_delete(post_id):
     connection.commit()
 
     return jsonify({"message": "投稿を削除しました。"}), 200
+
+
+@posts_bp.post("/posts/<int:post_id>/comments")
+def comment_create(post_id):
+    user_id = session.get("user_id")
+    if user_id is None:
+        return redirect(url_for("auth.login"))
+
+    content = request.form.get("content", "").strip()
+
+    if not content:
+        return jsonify({"error": "コメントを入力してください。"}), 400
+
+    try:
+        post_comments(
+            content=content,
+            user_id=user_id,
+            post_id=post_id,
+        )
+    except Exception:
+        current_app.logger.exception("コメントの投稿に失敗しました。")
+        return jsonify({"error": "コメントの投稿に失敗しました。"}), 500
+
+    return redirect(url_for("posts.timeline"))
