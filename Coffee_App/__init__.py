@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 
 from Coffee_App.config import Config
 from Coffee_App.database import get_db, init_app
@@ -20,7 +20,7 @@ def create_app():
 
     @app.route("/")
     def index():
-        return "Coffee App is running!"
+        return redirect(url_for("posts.timeline"))
 
     @app.route("/db-test")
     def db_test():

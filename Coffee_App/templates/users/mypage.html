@@ -1,66 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}マイページ - ぬまりば{% endblock %}
-
-{% block css %}
-<link rel"stylesheet" href="{{ url_for('static', filename'='css/mypage.css')}}">
-{% endblock %}
+{% block title %}設定 - ぬまりば{% endblock %}
 
 {% block content %}
 <section class="mypage-container">
-    <h1>マイページ</h1>
+    <h1>設定</h1>
 
-    <div class="profile-summary">
-        <img
-            src="{{ current_user.profile_image_url
-                or url_for('static', filename='images/default_icon.png')}}"
-            alt="プロフィール画像"
-            class="profile-icon"
-        >
+    <p>ユーザー設定画面です。</p>
 
-        <div>
-            <p>{{ current_user.username }}</p>
-            <p>{{   current_user.email }}</p>
+    <ul class="settings-menu">
+        <li>
+            <a href="{{ url_for('posts.timeline') }}">
+                タイムラインに戻る
+            </a>
+        </li>
+    </ul>
 
-            {% if current_user.profile_text %}
-                <p>{{ current_user.profile_text }}</p>
-            {% endif %}
-        </div>
-    </div>
-
-    <nav aria-label="設定メニュー">
-        <ul class="settings-menu">
-            <li>
-                <a href="{{ url_for('users.edit_profile')}}">
-                    プロフィール・アイコン設定
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ url_for('users.change_password')}}">
-                    パスワード変更
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ url_for('posts.user_posts, user_id=current_user.id')}}">
-                    自分の投稿一覧
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ url_for('users.delete_account_page')}}">
-                    アカウント削除
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-    <form method="post" action="{{ url_for('auth.logout')}}">
-        {% if form %}
-            {{ form.hidden_tag() }}
-        {% endif %}
-
+    <form method="post" action="{{ url_for('auth.logout') }}">
         <button type="submit">ログアウト</button>
     </form>
 </section>

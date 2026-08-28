@@ -1,5 +1,5 @@
 <html lang="ja">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='images/bottom_nav.css') }}">
 
         {% block css %}{% endblock %}
-</head>
+ </head>
 
-<body>
+ <body>
     {% include "common/header.html" %}
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -35,3 +36,5 @@
     
     {% include "common/bottom_nav.html" %}
     {% include "common/footer.html" %}
+ </body>
+</html>
