@@ -1,4 +1,5 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, current_app
+from Coffee_App.database import get_db
 from Coffee_App.models.category import get_categories
 from Coffee_App.models.post import search_posts
 
@@ -12,14 +13,23 @@ def search_page():
     category = request.args.get("category", "")
 
     if keyword or category:
-        posts = search_posts(keyword, category)
+        try:
+            connection = get_db()
+
+            with connection.cursor() as cursor:
+                posts = search_posts(cursor, keyword)
+
+        except Exception:
+            current_app.logger.exception("投稿の検索に失敗しました。")
+            posts = []
+
         return render_template(
             "search/search_results.html",
             keyword=keyword,
             category=category,
             posts=posts,
         )
-
+        
     categories = get_categories()
 
     return render_template(
@@ -27,6 +37,7 @@ def search_page():
         categories=categories,
     )
 
-@search_bp.get("/search/page")
-def search_page():
-    return render_template("search/search.html")
+
+# @search_bp.get("/search/page")
+# def search_page():
+#     return render_template("search/search.html")
