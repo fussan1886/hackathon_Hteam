@@ -17,7 +17,7 @@ def search_page():
             connection = get_db()
 
             with connection.cursor() as cursor:
-                posts = search_posts(cursor, keyword)
+                posts = search_posts(cursor, keyword, category)
 
         except Exception:
             current_app.logger.exception("投稿の検索に失敗しました。")
