@@ -66,8 +66,13 @@ def create_post():
         return jsonify({"error": "ログインが必要です。"}), 401
 
     content = request.form.get("content", "").strip()
+    category_id = request.form.get("category_id", type=int)
+
     if not content:
         return jsonify({"error": "本文は必須です。"}), 400
+    
+    if category_id is None:
+        return jsonify({"error": "カテゴリーを選択してください。"}), 400
 
     image_files = [image for image in request.files.getlist("images") if image.filename]
     invalid_files = [image.filename for image in image_files if not _is_allowed_image(image.filename)]
@@ -94,6 +99,7 @@ def create_post():
                 cursor,
                 user_id=user_id,
                 content=content,
+                category_id=category_id,
             )
             insert_images(cursor, post_id, image_urls)
             post = find_post_by_id(cursor, post_id)

@@ -9,7 +9,6 @@
 {% block content %}
     <section class="post-form-container">
         <h1>投稿する</h1>
-
         <form 
             method="post" 
             enctype="multipart/form-data"
@@ -39,10 +38,10 @@
 
                     {% for category in categories %}
                         <option 
-                            value="{{ category.id }}" 
-                            {% if request.form.get('category_id')|int == category.id %}selected{% endif %}>
+                            value="{{ category['id'] }}" 
+                            {% if request.form.get('category_id')|int == category['id']|int %}selected{% endif %}>
 
-                            {{ category.category_name }}
+                            {{ category['category_name'] }}
                         </option>
                     {% endfor %}
                 </select>

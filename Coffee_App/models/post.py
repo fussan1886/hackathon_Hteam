@@ -1,13 +1,14 @@
-def insert_post(cursor, user_id, content):
+def insert_post(cursor, user_id, content, category_id):
     sql = """
         INSERT INTO posts (
             user_id,
+            category_id,
             content,
             visibility
         )
-        VALUES (%s, %s, %s)
+        VALUES (%s, %s, %s, %s)
     """
-    cursor.execute(sql, (user_id, content, "public"))
+    cursor.execute(sql, (user_id, category_id, content, "public"))
     return cursor.lastrowid
 
 
