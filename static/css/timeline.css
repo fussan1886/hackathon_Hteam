@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f6f2ea;
+    color: #5e3c30;
+}
+
+.timeline-container {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 16px 100px;
+}
